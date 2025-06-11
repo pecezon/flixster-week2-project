@@ -1,6 +1,8 @@
+import "./components.css";
+
 const SortDropdown = ({ sortMovies }) => {
   return (
-    <div>
+    <div className="sorting-dropdown">
       <label>Sort By:</label>
 
       <select

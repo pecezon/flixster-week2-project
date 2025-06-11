@@ -28,12 +28,13 @@ export default function NavBar({
         }}
       >
         <input
+          className="text-field"
           type="text"
           value={currentSearchWord}
           placeholder="Search"
           onChange={(e) => setCurrentSearchWord(e.target.value)}
         />
-        <input type="submit" placeholder="Search" />
+        <input type="submit" placeholder="Search" className="search-button" />
         <button
           onClick={() => {
             setCurrentSearchWord("");
@@ -46,7 +47,6 @@ export default function NavBar({
         </button>
       </form>
       <SortDropdown sortMovies={sortMovies}></SortDropdown>
-      <p>hola</p>
     </nav>
   );
 }

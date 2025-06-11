@@ -3,6 +3,8 @@ import MovieList from "./components/MovieList";
 import NavBar from "./components/NavBar";
 import LoadMoreButton from "./components/LoadMoreButton";
 import MovieDetailsModal from "./components/MovieDetailsModal";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -19,6 +21,27 @@ function App() {
       accept: "application/json",
       Authorization: `Bearer ${apiKey}`,
     },
+  };
+
+  //Sort by funtion
+  const sort = (arr, type) => {
+    if (type === "original_title") {
+      //Sort by alphabetical order
+      arr.sort((a, b) => {
+        if (a.title < b.title) return -1;
+        if (a.title > b.title) return 1;
+        return 0;
+      });
+    } else if (type === "vote_average") {
+      arr.sort((a, b) => b.vote_average - a.vote_average);
+    } else {
+      arr.sort((a, b) => {
+        const dateA = new Date(a.release_date);
+        const dateB = new Date(b.release_date);
+        return dateB - dateA;
+      });
+    }
+    return arr;
   };
 
   //Fetch movies giving the page
@@ -38,8 +61,6 @@ function App() {
         apiURL = `https://api.themoviedb.org/3/movie/now_playing?include_adult=false&include_video=false&language=en-US&page=${page}`;
       }
 
-      console.log(apiURL);
-
       //You await the response giving an specified apiurl
       const res = await fetch(apiURL, options);
 
@@ -52,13 +73,12 @@ function App() {
 
       //Parse the movies in a Json format
       const parsedMovies = await res.json();
-
       //If its the first page reload everything
       if (page === 1) {
-        setMovies(parsedMovies.results);
+        setMovies(sort(parsedMovies.results, sorting));
       } else {
         //If its loading more stuff just append it
-        setMovies([...movies, ...parsedMovies.results]);
+        setMovies(sort([...movies, ...parsedMovies.results], sorting));
       }
     } catch (error) {
       console.error(error);
@@ -121,19 +141,21 @@ function App() {
 
   return (
     <div className="App">
+      <Header />
       <NavBar
         fetchMovies={fetchMovies}
         setCurrentMode={setCurrentMode}
         setCurrentSearchWord={setCurrentSearchWord}
         currentSearchWord={currentSearchWord}
         setCurrentPage={setCurrentPage}
+        sortingType={sortingType}
         sortMovies={sortMovies}
-      ></NavBar>
+      />
       <MovieList
         movies={movies}
         setIsModalOpen={setIsModalOpen}
         setSelectedMovie={setSelectedMovie}
-      ></MovieList>
+      />
       <LoadMoreButton loadMoreMovies={loadMoreMovies}></LoadMoreButton>
       <MovieDetailsModal
         isModalOpen={isModalOpen}
@@ -142,8 +164,8 @@ function App() {
         setSelectedMovie={setSelectedMovie}
         genresList={genresList}
         sortingType={sortingType}
-      ></MovieDetailsModal>
-      <footer></footer>
+      />
+      <Footer />
     </div>
   );
 }

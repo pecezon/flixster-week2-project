@@ -18,8 +18,6 @@ export default function MovieDetailsModal({
     release_date = selectedMovie.release_date;
     overview = selectedMovie.overview;
 
-    console.log(genresList);
-
     //Map genres ids with their respective names
     genres = selectedMovie.genre_ids.map((g) => {
       for (let genreObject of genresList) {
