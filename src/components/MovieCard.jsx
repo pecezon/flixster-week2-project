@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./components.css";
 
 function MovieCard({
@@ -9,16 +10,41 @@ function MovieCard({
   watched,
   setWatched,
 }) {
-  const { title, poster_path, vote_average } = movie;
+  const { title, poster_path, vote_average, id } = movie;
 
   function clickFlow() {
     setSelectedMovie(movie);
     setIsModalOpen(true);
   }
 
-  function checkLiked(id) {}
+  let [watchID, setWatchID] = useState(undefined);
 
-  function checkWatched(id) {}
+  function watchingProcess(id) {
+    if (watched[id]) {
+      delete watched[id];
+      setWatchID(undefined);
+    } else {
+      let newWatched = {};
+      setWatchID(id);
+      newWatched[id] = movie;
+      setWatched({ ...watched, ...newWatched });
+    }
+  }
+
+  //Altough this varibles aren't being used to display anything I use them to refresh the component and be able to dislike the movie
+  let [likeID, setLikeID] = useState(undefined);
+
+  function likingProcess(id) {
+    if (liked[id]) {
+      delete liked[id];
+      setLikeID(undefined);
+    } else {
+      let newLiked = {};
+      setLikeID(id);
+      newLiked[id] = movie;
+      setLiked({ ...liked, ...newLiked });
+    }
+  }
 
   return (
     <div className="movie-card">
@@ -33,8 +59,24 @@ function MovieCard({
         </div>
       </div>
       <div className="movie-buttons">
-        <i className={"favorite-button fa-solid fa-heart"} />
-        <i className={"watched-button fa-solid fa-eye"} />
+        <i
+          className={
+            "favorite-button fa-heart " +
+            (liked[id] ? "fa-solid" : "fa-regular")
+          }
+          onClick={() => {
+            likingProcess(id);
+          }}
+        />
+
+        <i
+          className={
+            "watched-button fa-eye " + (watched[id] ? "fa-solid" : "fa-regular")
+          }
+          onClick={() => {
+            watchingProcess(id);
+          }}
+        />
       </div>
     </div>
   );

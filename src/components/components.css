@@ -105,7 +105,8 @@ form {
   height: 75px;
 }
 
-.movie-buttons i:hover {
+.movie-buttons i:hover,
+.movie-buttons .fa-solid {
   color: red;
 }
 
