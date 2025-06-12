@@ -107,6 +107,34 @@ function App() {
     }
   }
 
+  //Fetching function for the videos related to a movie id
+  async function fetchVideoList(movieID) {
+    try {
+      let res = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieID}/videos?language=en-US`,
+        options
+      );
+
+      //Throw error if the fetching was not successful
+      if (!res.ok) {
+        throw new Error(
+          "Something wrong happened fetching the videolist related to the movie id: " +
+            res.status
+        );
+      }
+
+      res = await res.json();
+
+      for (let v of res.results) {
+        console.log(v);
+      }
+
+      return res.results;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   //Setting default movie fetching mode, current page, and current search word
   const [currentPage, setCurrentPage] = useState(1);
   const [currentMode, setCurrentMode] = useState("all");
@@ -128,6 +156,19 @@ function App() {
     await fetchMovies(sortT, 1, currentMode, currentSearchWord);
     setSortingType(sortT);
   }
+
+  //Liked and watched lists
+  // Body Example
+  // {
+  //   id1:{
+  //     movie-details
+  //   },
+  //   id2:{
+  //     movie-details
+  //   }
+  // }
+  let [liked, setLiked] = useState({});
+  let [watched, setWatched] = useState({});
 
   //Fetch Default movies at loading the page
   useEffect(() => {
@@ -155,6 +196,10 @@ function App() {
         movies={movies}
         setIsModalOpen={setIsModalOpen}
         setSelectedMovie={setSelectedMovie}
+        liked={liked}
+        setLiked={setLiked}
+        watched={watched}
+        setWatched={setWatched}
       />
       <LoadMoreButton loadMoreMovies={loadMoreMovies}></LoadMoreButton>
       <MovieDetailsModal
@@ -164,6 +209,7 @@ function App() {
         setSelectedMovie={setSelectedMovie}
         genresList={genresList}
         sortingType={sortingType}
+        fetchVideoList={fetchVideoList}
       />
       <Footer />
     </div>

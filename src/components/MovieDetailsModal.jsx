@@ -1,15 +1,19 @@
+import { useEffect, useState } from "react";
+
 export default function MovieDetailsModal({
   selectedMovie,
   setSelectedMovie,
   isModalOpen,
   setIsModalOpen,
   genresList,
+  fetchVideoList,
 }) {
   const className = `modal ${isModalOpen}`;
   let title,
     poster_path,
     release_date,
-    overview = "";
+    overview,
+    id = "";
   let genres = [];
 
   if (selectedMovie) {
@@ -17,6 +21,7 @@ export default function MovieDetailsModal({
     poster_path = selectedMovie.poster_path;
     release_date = selectedMovie.release_date;
     overview = selectedMovie.overview;
+    id = selectedMovie.id;
 
     //Map genres ids with their respective names
     genres = selectedMovie.genre_ids.map((g) => {
@@ -28,6 +33,28 @@ export default function MovieDetailsModal({
     });
   }
 
+  let [videoDisplaying, setVideoDisplaying] = useState("");
+
+  async function selectDisplayVideo() {
+    if (id) {
+      let videoList = await fetchVideoList(id);
+      for (let v of videoList) {
+        if (v.type === "Trailer") {
+          setVideoDisplaying(v.key);
+          break;
+        }
+      }
+
+      if (!videoDisplaying) {
+        setVideoDisplaying(videoList[0].key || null);
+      }
+    }
+  }
+
+  useEffect(() => {
+    selectDisplayVideo();
+  }, [id]);
+
   return (
     <section className={className}>
       <div className="modal-content">
@@ -37,13 +64,22 @@ export default function MovieDetailsModal({
           alt={title}
         />
         <h3>Release Date: {release_date}</h3>
-        <h4>Overview: {overview}</h4>
-        <h4>
-          Genres:{" "}
-          {genres.map((g) => (
-            <h4>{g}</h4>
-          ))}
-        </h4>
+        <h4>Overview</h4>
+        <p>{overview} </p>
+        <h4>Genres</h4>
+        {genres.map((g, id) => (
+          <p key={id}>{g}</p>
+        ))}
+        <iframe
+          width="560"
+          height="315"
+          src={"https://www.youtube.com/embed/" + videoDisplaying}
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        ></iframe>
 
         <button
           onClick={() => {
