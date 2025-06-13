@@ -99,8 +99,15 @@ Deployed Application (**required**): [Flixster Deployed Site](https://flixster-w
 
 ### Walkthrough Video
 
-<div style="position: relative; padding-bottom: 54.82233502538071%; height: 0;"><iframe src="https://www.loom.com/embed/e57fcf6f40d24683bb476e35f0f6a0cf?sid=acd561a3-7644-4e45-9858-74bec30f364d" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
-
+<div>
+    <a href="https://www.loom.com/share/e57fcf6f40d24683bb476e35f0f6a0cf">
+      <p>Flixster - Codepath Meta U Week 2 - Watch Video</p>
+    </a>
+    <a href="https://www.loom.com/share/e57fcf6f40d24683bb476e35f0f6a0cf">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/e57fcf6f40d24683bb476e35f0f6a0cf-bb2b5e80e26e3669-full-play.gif">
+    </a>
+  </div>
+  
 ### Reflection
 
 - Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
