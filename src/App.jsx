@@ -1,4 +1,5 @@
 import "./App.css";
+import "./components/components.css";
 import MovieList from "./components/MovieList";
 import NavBar from "./components/NavBar";
 import LoadMoreButton from "./components/LoadMoreButton";
@@ -6,6 +7,7 @@ import MovieDetailsModal from "./components/MovieDetailsModal";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { useEffect, useState } from "react";
+import formatMovies from "./utils/formatMovies";
 
 function App() {
   //List of movies fetched and genres list array
@@ -181,37 +183,63 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="App">
-      <Header />
-      <NavBar
-        fetchMovies={fetchMovies}
-        setCurrentMode={setCurrentMode}
-        setCurrentSearchWord={setCurrentSearchWord}
-        currentSearchWord={currentSearchWord}
-        setCurrentPage={setCurrentPage}
-        sortingType={sortingType}
-        sortMovies={sortMovies}
-      />
-      <MovieList
-        movies={movies}
-        setIsModalOpen={setIsModalOpen}
-        setSelectedMovie={setSelectedMovie}
-        liked={liked}
-        setLiked={setLiked}
-        watched={watched}
-        setWatched={setWatched}
-      />
-      <LoadMoreButton loadMoreMovies={loadMoreMovies}></LoadMoreButton>
-      <MovieDetailsModal
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        selectedMovie={selectedMovie}
-        setSelectedMovie={setSelectedMovie}
-        genresList={genresList}
-        sortingType={sortingType}
-        fetchVideoList={fetchVideoList}
-      />
-      <Footer />
+    <div className="full-app">
+      <section className="side-bar">
+        <i
+          className="fa-solid fa-house"
+          onClick={() => {
+            setCurrentSearchWord("");
+            setCurrentMode("all");
+            fetchMovies(sortingType, 1, "all");
+            setCurrentPage(1);
+          }}
+        />
+        <i
+          className="fa-solid fa-heart"
+          onClick={() => {
+            setMovies(formatMovies(liked));
+          }}
+        />
+        <i
+          className="fa-solid fa-eye"
+          onClick={() => {
+            setMovies(formatMovies(watched));
+          }}
+        />
+      </section>
+      <div className="App-Body">
+        <Header />
+        <NavBar
+          fetchMovies={fetchMovies}
+          setCurrentMode={setCurrentMode}
+          setCurrentSearchWord={setCurrentSearchWord}
+          currentSearchWord={currentSearchWord}
+          setCurrentPage={setCurrentPage}
+          sortingType={sortingType}
+          sortMovies={sortMovies}
+        />
+        <MovieList
+          movies={movies}
+          setIsModalOpen={setIsModalOpen}
+          setSelectedMovie={setSelectedMovie}
+          liked={liked}
+          setLiked={setLiked}
+          watched={watched}
+          setWatched={setWatched}
+          loadMoreMovies={loadMoreMovies}
+        />
+        <LoadMoreButton loadMoreMovies={loadMoreMovies}></LoadMoreButton>
+        <MovieDetailsModal
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          selectedMovie={selectedMovie}
+          setSelectedMovie={setSelectedMovie}
+          genresList={genresList}
+          sortingType={sortingType}
+          fetchVideoList={fetchVideoList}
+        />
+        <Footer />
+      </div>
     </div>
   );
 }

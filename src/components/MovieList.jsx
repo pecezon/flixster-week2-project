@@ -1,5 +1,6 @@
 import "./components.css";
 import MovieCard from "./MovieCard";
+import NotFound from "./NotFound";
 
 function MovieList({
   movies,
@@ -32,7 +33,7 @@ function MovieList({
       </main>
     );
   } else {
-    return <h1>Movies not found</h1>;
+    return <NotFound />;
   }
 }
 

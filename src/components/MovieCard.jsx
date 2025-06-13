@@ -52,6 +52,9 @@ function MovieCard({
         <img
           src={"https://image.tmdb.org/t/p/original" + poster_path}
           alt={title}
+          onError={(e) =>
+            (e.currentTarget.src = "src/assets/movie-template.png")
+          }
         />
         <div className="movie-info">
           <h3>{title}</h3>

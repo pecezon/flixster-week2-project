@@ -10,7 +10,7 @@ export default function MovieDetailsModal({
 }) {
   const className = `modal ${isModalOpen}`;
   let title,
-    poster_path,
+    backdrop_path,
     release_date,
     overview,
     id = "";
@@ -18,7 +18,7 @@ export default function MovieDetailsModal({
 
   if (selectedMovie) {
     title = selectedMovie.title;
-    poster_path = selectedMovie.poster_path;
+    backdrop_path = selectedMovie.backdrop_path;
     release_date = selectedMovie.release_date;
     overview = selectedMovie.overview;
     id = selectedMovie.id;
@@ -60,8 +60,11 @@ export default function MovieDetailsModal({
       <div className="modal-content">
         <h2>{title}</h2>
         <img
-          src={"https://image.tmdb.org/t/p/original" + poster_path}
+          src={"https://image.tmdb.org/t/p/original" + backdrop_path}
           alt={title}
+          onError={(e) =>
+            (e.currentTarget.src = "src/assets/movie-template.png")
+          }
         />
         <h3>Release Date: {release_date}</h3>
         <h4>Overview</h4>
