@@ -127,10 +127,6 @@ function App() {
 
       res = await res.json();
 
-      for (let v of res.results) {
-        console.log(v);
-      }
-
       return res.results;
     } catch (error) {
       console.error(error);
