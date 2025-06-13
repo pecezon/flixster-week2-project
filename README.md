@@ -99,20 +99,13 @@ Deployed Application (**required**): [Flixster Deployed Site](https://flixster-w
 
 ### Walkthrough Video
 
-<div>
-    <a href="https://www.loom.com/share/e57fcf6f40d24683bb476e35f0f6a0cf">
-      <p>No name - 13 June 2025 - Watch Video</p>
-    </a>
-    <a href="https://www.loom.com/share/e57fcf6f40d24683bb476e35f0f6a0cf">
-      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/e57fcf6f40d24683bb476e35f0f6a0cf-bb2b5e80e26e3669-full-play.gif">
-    </a>
-  </div>
+<div style="position: relative; padding-bottom: 54.82233502538071%; height: 0;"><iframe src="https://www.loom.com/embed/e57fcf6f40d24683bb476e35f0f6a0cf?sid=acd561a3-7644-4e45-9858-74bec30f364d" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
 ### Reflection
 
 - Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-The React hooks and JS topics in class where key to understand how to manage the data fetched from the api, also the fetch funciton to fetch data explanation was super useful, I barely use any documentation (except for the API one) or internet to understand concepts and it felt really good to be able to build a project like this basically from my mind
+The React hooks and JS topics in class where key to understand how to manage the data fetched from the api, also the fetch funciton to fetch data explanation was super useful, I barely used any documentation (except for the API one) or internet to understand concepts and it felt really good to be able to build a project from scratch like this basically from my mind
 
 - If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
 
@@ -120,7 +113,7 @@ I would definetly made it more responsive adding media queries for tablets and m
 
 - Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-I loved the project, I think I've learned more in 2 weeks than in a semester in college, everything went as planned for this project but I should written cleaner code, it may not be that bad, but it can be cleaner
+I loved the project, I think I've learned more in 2 weeks than in a semester in college, everything went as planned for this project but I should've written cleaner code, it may not be that bad, but it always can be cleaner
 
 ### Open-source libraries used
 
@@ -128,4 +121,4 @@ I loved the project, I think I've learned more in 2 weeks than in a semester in 
 
 ### Shout out
 
-Shot out to Thomas he helped me whenever I needed and he was always calm and patient with me.
+Shot out to Thomas the codepath instructo he helped me whenever I needed and he was always calm and patient with me.
